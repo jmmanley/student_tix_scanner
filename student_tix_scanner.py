@@ -67,7 +67,7 @@ def send_notification(text, To, From='Me'):
 def parse_metopera(To):
     
     html = urllib.request.urlopen('https://www.metopera.org/season/tickets/student-tickets/')
-    soup = bs(html)
+    soup = bs(html, "html.parser")
     divs = soup.findAll("li", {"class": "calendar-list-day"})
     
     def parse_metopera_listing(tag):
@@ -89,7 +89,7 @@ def parse_metopera(To):
 def parse_carnegie(To):
     
     html = urllib.request.urlopen('https://www.carnegiehall.org/Events/Discount-Programs/Student-Tickets')
-    soup = bs(html)
+    soup = bs(html, "html.parser")
     divs = soup.findAll("div", {"class": "ch-events-list-item"})
 
     def parse_carnegie_listing(tag):
@@ -114,7 +114,7 @@ def parse_carnegie(To):
 def parse_nyphil(To):
     
     html = urllib.request.urlopen('https://nyphil.org/rush')
-    soup = bs(html)
+    soup = bs(html, "html.parser")
     divs1 = soup.findAll("div", {"class": "date-cont"})
     divs2 = soup.findAll("div", {"class": "cal-date"})
     
@@ -144,14 +144,17 @@ if __name__ == "__main__":
     
     while True:
 
-        if '-met' in args:
-            parse_metopera(To)
+        try:
+            if '-met' in args:
+                parse_metopera(To)
 
-        if '-carnegie' in args:
-            parse_carnegie(To)
+            if '-carnegie' in args:
+                parse_carnegie(To)
 
-        if '-nyphil' in args:
-            parse_nyphil(To)
+            if '-nyphil' in args:
+                parse_nyphil(To)
+        except:
+            print('error')
         
         time.sleep(300) # sorry for hard coding ;)
     

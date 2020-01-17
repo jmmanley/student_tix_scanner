@@ -124,7 +124,7 @@ def parse_nyphil(To):
         month   = tag1.contents[1].contents[3].contents[0].replace('\r','').replace('\n','').replace(' ','').split(',')[0]
         date    = month[:3] + ' ' + datenum
 
-        show = tag2.contents[1].contents[3].contents[5].contents[1].contents[0]
+        show = str(tag2.contents[1].contents[3].contents[5].contents[1].contents[0])
         
         return [date, show]
     
@@ -144,7 +144,7 @@ if __name__ == "__main__":
     
     while True:
 
-        try:
+        if True:
             if '-met' in args:
                 parse_metopera(To)
 
@@ -153,8 +153,8 @@ if __name__ == "__main__":
 
             if '-nyphil' in args:
                 parse_nyphil(To)
-        except:
-            print('error')
+        #except:
+        #    print('error')
         
         time.sleep(300) # sorry for hard coding ;)
     

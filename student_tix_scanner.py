@@ -13,6 +13,7 @@ Jason Manley, jmanley AT rockefeller DOT edu
 
 from bs4 import BeautifulSoup as bs
 import urllib.request
+from urllib.request import build_opener, HTTPCookieProcessor
 import smtplib
 from email.message import EmailMessage
 import csv
@@ -66,7 +67,9 @@ def send_notification(text, To, From='Me'):
 
 def parse_metopera(To):
     
-    html = urllib.request.urlopen('https://www.metopera.org/season/tickets/student-tickets/')
+    opener = build_opener(HTTPCookieProcessor())
+    response = opener.open('https://www.metopera.org/season/tickets/student-tickets/')
+    html = response.read()
     soup = bs(html, "html.parser")
     divs = soup.findAll("li", {"class": "calendar-list-day"})
     
@@ -88,7 +91,9 @@ def parse_metopera(To):
     
 def parse_carnegie(To):
     
-    html = urllib.request.urlopen('https://www.carnegiehall.org/Events/Discount-Programs/Student-Tickets')
+    opener = build_opener(HTTPCookieProcessor())
+    response = opener.open('https://www.carnegiehall.org/Events/Discount-Programs/Student-Tickets')
+    html = response.read()
     soup = bs(html, "html.parser")
     divs = soup.findAll("div", {"class": "ch-events-list-item"})
 
@@ -113,7 +118,9 @@ def parse_carnegie(To):
 
 def parse_nyphil(To):
     
-    html = urllib.request.urlopen('https://nyphil.org/rush')
+    opener = build_opener(HTTPCookieProcessor())
+    response = opener.open('https://nyphil.org/rush')
+    html = response.read()
     soup = bs(html, "html.parser")
     divs1 = soup.findAll("div", {"class": "date-cont"})
     divs2 = soup.findAll("div", {"class": "cal-date"})

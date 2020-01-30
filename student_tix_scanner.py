@@ -99,7 +99,7 @@ def parse_carnegie(To):
 
     def parse_carnegie_listing(tag):
         # apologies again
-        date = tag.contents[1].contents[1].contents[0][:3] + ' ' + divs[0].contents[1].contents[3].contents[0]
+        date = tag.contents[1].contents[1].contents[0][:3] + ' ' + tag.contents[1].contents[3].contents[0]
         show = tag.contents[3].contents[1].contents[3].contents[3].contents[1].contents[1].contents[1].contents[0]
         subtitle = tag.contents[3].contents[1].contents[3].contents[3].contents[1].contents[3].contents[0].replace('\r','').replace('\n','').replace('  ','')
     

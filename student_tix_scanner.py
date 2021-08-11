@@ -5,7 +5,9 @@ and sending notifications when a new show is available!
 Currently supported:
 - The Metropolitan Opera (https://www.metopera.org/season/tickets/student-tickets/)
 - Carnegie Hall (https://www.carnegiehall.org/Events/Discount-Programs/Student-Tickets)
-- New York Philharmonic (https://nyphil.org/rush - also check out Free Fridays that opens on Mondays at noon: https://nyphil.org/concerts-tickets/explore/discounts-and-group-sales/free-fridays)
+
+Currently not working:
+- New York Philharmonic - they seem to have removed rush tickets from their website since COVID (https://nyphil.org/rush - also check out Free Fridays that opens on Mondays at noon: https://nyphil.org/concerts-tickets/explore/discounts-and-group-sales/free-fridays)
 
 Jason Manley, jmanley AT rockefeller DOT edu
 """
@@ -159,7 +161,9 @@ if __name__ == "__main__":
                 parse_carnegie(To)
 
             if '-nyphil' in args:
-                parse_nyphil(To)
+                print('NY Phil not supported for now!')
+                args = [x for x in args if x != '-nyphil']
+                #parse_nyphil(To)
         except:
             print('error')
         

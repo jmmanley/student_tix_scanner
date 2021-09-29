@@ -94,7 +94,7 @@ def parse_metopera(To):
 def parse_carnegie(To):
     
     opener = build_opener(HTTPCookieProcessor())
-    response = opener.open('https://www.carnegiehall.org/Events/Discount-Programs/Student-Tickets')
+    response = opener.open('https://www.carnegiehall.org/Events/Discount-Programs/Student-Insider/Student-Discounts')
     html = response.read()
     soup = bs(html, "html.parser")
     divs = soup.findAll("div", {"class": "ch-events-list-item"})
@@ -161,11 +161,11 @@ if __name__ == "__main__":
                 parse_carnegie(To)
 
             if '-nyphil' in args:
-                print('NY Phil not supported for now!')
+                print('NY Phil is no longer selling student tickets online!')
                 args = [x for x in args if x != '-nyphil']
                 #parse_nyphil(To)
         except:
-            print('error')
+           print('error')
         
         time.sleep(300) # sorry for hard coding ;)
     

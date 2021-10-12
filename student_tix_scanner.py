@@ -124,25 +124,21 @@ def parse_nyphil(To):
     response = opener.open('https://nyphil.org/rush')
     html = response.read()
     soup = bs(html, "html.parser")
-    divs1 = soup.findAll("div", {"class": "date-cont"})
-    divs2 = soup.findAll("div", {"class": "cal-date"})
+    divs = soup.findAll("div", {"id": "main"})
+    shows = divs[0].findAll("div", {"id": "content"})[0].contents[7].contents[8:-6]
     
-    def parse_nyphil_listing(tag1, tag2):
-        # apologies again
-        datenum = tag1.contents[1].contents[1].contents[0]
-        month   = tag1.contents[1].contents[3].contents[0].replace('\r','').replace('\n','').replace(' ','').split(',')[0]
-        date    = month[:3] + ' ' + datenum
-
-        show = str(tag2.contents[1].contents[3].contents[5].contents[1].contents[0])
+    results = []
+    for i in range(len(shows)):
+        try:
+            if len(shows[i].contents)>0:
+                show = shows[i].contents[0]
+                i += 1
+                date = shows[i].split('—')[1][1:]
+                results.append([date.replace(',',''),show.replace(',','')])
+        except:
+            pass
         
-        return [date, show]
-    
-    shows = []
-    
-    for i in range(len(divs1)):
-        shows.append(parse_nyphil_listing(divs1[i], divs2[i]))
-        
-    check_new_and_notify(shows, 'NyPhil.csv', To)
+    check_new_and_notify(results, 'NyPhil.csv', To)
 
 
 ### COMMAND LINE SCRIPT ###
@@ -153,19 +149,17 @@ if __name__ == "__main__":
     
     while True:
 
-        try:
-            if '-met' in args:
-                parse_metopera(To)
+        #try:
+        if '-met' in args:
+            parse_metopera(To)
 
-            if '-carnegie' in args:
-                parse_carnegie(To)
+        if '-carnegie' in args:
+            parse_carnegie(To)
 
-            if '-nyphil' in args:
-                print('NY Phil is no longer selling student tickets online!')
-                args = [x for x in args if x != '-nyphil']
-                #parse_nyphil(To)
-        except:
-           print('error')
+        if '-nyphil' in args:
+            parse_nyphil(To)
+        #except:
+        #   print('error')
         
         time.sleep(300) # sorry for hard coding ;)
     

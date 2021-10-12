@@ -149,17 +149,17 @@ if __name__ == "__main__":
     
     while True:
 
-        #try:
-        if '-met' in args:
-            parse_metopera(To)
+        try:
+            if '-met' in args:
+                parse_metopera(To)
 
-        if '-carnegie' in args:
-            parse_carnegie(To)
+            if '-carnegie' in args:
+                parse_carnegie(To)
 
-        if '-nyphil' in args:
-            parse_nyphil(To)
-        #except:
-        #   print('error')
+            if '-nyphil' in args:
+                parse_nyphil(To)
+        except:
+           print('error')
         
         time.sleep(300) # sorry for hard coding ;)
     

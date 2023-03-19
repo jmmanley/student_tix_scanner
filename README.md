@@ -1,5 +1,7 @@
 # :musical_score: NY Classical Student Tickets Notifier 
 
+🚨 *THIS REPO NOW LARGELY DOESN'T WORK - but likely could be updated to continue being useful* 🚨
+
 I found myself periodically checking the websites for student tickets at the Met Opera, Carnegie Hall, and NY Phil -- and knew there had be a better way to find out about these awesome deals!
 
 An hour later, I finished this quick and dirty scraper for the student tickets of the three aforementioned NYC classical music institutions.
